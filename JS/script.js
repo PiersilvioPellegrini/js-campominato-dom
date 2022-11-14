@@ -1,12 +1,12 @@
 // varibaile del bottone
 const btnPLay = document.querySelector(".btn-play");
 const difficoltà = document.querySelector('[name="difficoltà"]');
+let contatore = 0;
 let bombs;
-let counter;
+// let contatore = 0
 
 // evento sul bottone in cui richiamo la fuzione generaGrigliaCelle();
 btnPLay.addEventListener("click", function () {
-
   let cells;
 
   //   CONDIZIONE PER ASSEGNARE IL VALORE DELLE CELLE IN BASE ALLA DIFFICOLTÀ
@@ -57,13 +57,6 @@ function generateBombList(totalCells, numBomb) {
   return bombList;
 }
 
-
-
-
-
-
-
-
 /**
  * 
  * 
@@ -71,24 +64,21 @@ function generateBombList(totalCells, numBomb) {
   * @this {HTMLDivElement} - 
  */
 
+
 function oncellCLick() {
-    
   // creo una variabile a cui assegno il valore dell'elemento cliccato
   const numInsideCell = +this.dataset.numeroCella;
   // se il numero all'interno della cella è presente nell'array delle bombe
-  
+
   if (bombs.includes(numInsideCell)) {
-    
     // la partita finisce
     this.classList.add("bg-red");
-    alert("Hai trovato una bomba dopo " +  "tentativi" );
-  }else{
+    alert("Hai trovato una bomba dopo "+": " + contatore + " " + "tentativi");
+  } else {
     this.classList.add("bg-celeste");
-    
-    
+    contatore++;
+    console.log(contatore);
   }
-  
-    
 }
 
 /**
@@ -128,9 +118,12 @@ function generaGrigliaCelle(numCelleRiga) {
     // creo evento sull'elemento cella sinìgola
     cell.addEventListener("click", oncellCLick);
     
-    
+    // cell.addEventListener("click", contatore);
+
     // aggiungo la cella al contenitore
     container.appendChild(cell);
   }
-  
+  return totalCells;
 }
+
+
